@@ -273,7 +273,7 @@
             //その詳細情報が出るような別ページに飛ぶ
             $(".component_content_one").on("click", function(){
                 var i = $(this).index()
-                window.open("./component_content_one.html")
+                window.open("./component_content_one.html");
 
             });
 
@@ -281,11 +281,11 @@
 
             $(".add_content_one").on("click",function(){
                 // class="memo"
-                var $before_div = $(this).parent().parent().prev()
-                $before_div.children('div').first().clone().appendTo($before_div)
+                var $before_div = $(this).parent().parent().prev();
+                $before_div.children('div').first().clone().appendTo($before_div);
                 //加える時にデータベースから持ってきた進捗度合いを考えて、計算する。
-                $before_div.children('div').last().find(".change_1").css('transform','rotate(0deg)')
-                $before_div.children('div:last').find(".change_2").css('transform','rotate(0deg)')
+                $before_div.children('div').last().find(".change_1").css('transform','rotate(0deg)');
+                $before_div.children('div:last').find(".change_2").css('transform','rotate(0deg)');
                 $(".popup_one").removeClass("active");
             });
 
