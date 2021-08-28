@@ -53,7 +53,7 @@
           <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
           <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
           <dl>
-              <script type="text/javascripts" class="../src/account.js"></script>
+              <h2><dd>アカウント名</dd></h2>
               <h3>卒業年：</h3>
               <dd>卒業予定年</dd>
               <h3>学校名：</h3>
@@ -227,16 +227,296 @@
         </table>
     </div>
   </div>
-  <!--
-  <div id="container"></div>
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script>
-      const element = React.createElement;
-      const container = document.querySelector('#container');
-      ReactDOM.render(element('h3',null,'Hello React'), container);
-  </script>
-  -->
+    <script>
+        $(function() {  
+            // 今後のスケジュール等のタブ切り替え
+            $(".content_number").on("click", function() {  //１．タブをクリックしたときに
+                var i = $(this).index();  //２．クリックしたタブが何個目かをiに代入
+                $(".content_cover").removeClass("active");  //３．全てのボックスからactiveクラスを外す
+                $(".content_cover").eq(i).addClass("active");  //４．ボックスのi番目にactiveクラスを付ける
+
+            });
+
+            // コンテンツ1の中のコンテンツ追加のためのpopup
+            $(".content_one_add_button").on("click", function() {  //１．タブをクリックしたときに
+                $(".popup_one").addClass("active");
+            });
+
+            // コンテンツ1の中のコンテンツ追加のためのpopupを消す場合
+            $(".close_popup_one").on("click", function() {  //１．タブをクリックしたときに
+                $(".popup_one").removeClass("active");
+            });
+
+            // コンテンツ2の中のコンテンツ追加のためのpopup
+            $(".content_second_add_button").on("click", function() {  //１．タブをクリックしたときに
+                $(".popup_second").addClass("active");
+            });
+
+            // コンテンツ2の中のコンテンツ追加のためのpopupを消す場合
+            $(".close_popup_second").on("click", function() {  //１．タブをクリックしたときに
+                $(".popup_second").removeClass("active");
+            });
+
+            // コンテンツ１の中のコンテンツを追加する時、
+            //popupを消すことと、その追加するために用意したテキストボックスの内容を
+            //受け渡して、それをmain pageで表現することが必要
+
+            $(".add_content_second").on("click", function() { 
+                var $before_div_second = $(this).parent().parent().parent();
+                $before_div_second.children('div').first().clone().appendTo($before_div_second);
+                //加える時にデータベースから持ってきた進捗度合いを考えて、計算する。
+                $before_div_second.children('div').last().find(".change_1").css('transform','rotate(0deg)');
+                $before_div_second.children('div:last').find(".change_2").css('transform','rotate(0deg)');
+                $(".popup_second").removeClass("active");
+            });
+            //コンポーネントをクリックされたら、それに付随した情報を基に
+            //その詳細情報が出るような別ページに飛ぶ
+            $(".component_content_one").on("click", function(){
+                var i = $(this).index()
+                window.open("./component_content_one.html")
+
+            });
+
+
+
+            $(".add_content_one").on("click",function(){
+                // class="memo"
+                var $before_div = $(this).parent().parent().prev()
+                $before_div.children('div').first().clone().appendTo($before_div)
+                //加える時にデータベースから持ってきた進捗度合いを考えて、計算する。
+                $before_div.children('div').last().find(".change_1").css('transform','rotate(0deg)')
+                $before_div.children('div:last').find(".change_2").css('transform','rotate(0deg)')
+                $(".popup_one").removeClass("active");
+            });
+
+            //もし、データベースから読み込んだ時、数が足りなかったら数をたす
+            var $div_length_contain_one = $('.component_content_one').length
+            //あとはfor文で繰り返し
+            if ($div_length_contain_one < 100) {
+                $('.component_content_one').parent().children('div').first().clone().appendTo($('.component_content_one').parent())
+                //加える時にデータベースから持ってきた進捗度合いを考えて、計算する。
+                //rotateについてはもう一度計算しなおさなければならない。
+                $('.component_content_one').parent().children('div:last').find(".change_1").css('transform','rotate(0deg)')
+                $('.component_content_one').parent().children('div:last').find(".change_2").css('transform','rotate(0deg)')
+            }
+
+            });
+    </script>
+    
+    <!-- class "contents" involve all contents -->
+    <!-- class "content" involve each content -->
+    <div class = "contents">
+        <!-- class "~th_content" is select button -->
+        <div class="select_content">
+            <div class="first_content content_number">1.今後のスケジュール感</div>
+            <div class="second_content content_number">2.会社</div>
+        </div>
+        <div class="content_cover">
+            
+            <div class="content">
+
+                    <!-- class "ES" is content for ES -->
+                    <div class="ES component_content_one">
+                        <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                            <div style="position:relative;width:200px;height:200px;">
+                                <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                    <span>asdf</span>
+                                    <span>1</span>
+                                </div>
+                                <!-- 右側の180度分の領域 -->
+                                <div class="square" style="right:0">
+                                    <div class="square change_1" style="right:100%;transform-origin: 100% 50%;transform:rotate(180deg);">
+                                        <div class="circle" style="left:0;"></div>
+                                    </div>
+                                </div>
+                                <!-- 左側の180度分の領域 -->
+                                <div class="square" style="left:0;">
+                                    <div class="square change_2" style="left:100%;transform-origin: 0 50%;transform:rotate(30deg);">
+                                        <div class="circle" style="right:0;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- class "ES2" is content for ES2 -->
+                    <div class="ES2 component_content_one">
+                        <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                            <div style="position:relative;width:200px;height:200px;">
+                                <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                    <span>asdf</span>
+                                    <span>1</span>
+                                </div>
+                                <!-- 右側の180度分の領域 -->
+                                <div class="square" style="right:0">
+                                <div class="square" style="right:100%;transform-origin: 100% 50%;transform:rotate(60deg);">
+                                    <div class="circle" style="left:0;"></div>
+                                </div>
+                                </div>
+                                <!-- 左側の180度分の領域 -->
+                                <div class="square" style="left:0;">
+                                <div class="square" style="left:100%;transform-origin: 0 50%;transform:rotate(0deg);">
+                                    <div class="circle" style="right:0;">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- class "content_name" must be incompimented for 折り返し -->
+                    <div class="intern component_content_one">
+                        <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                            <div style="position:relative;width:200px;height:200px;">
+                                <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                    <span>asdf</span>
+                                    <span>1</span>
+                                </div>
+                                <!-- 右側の180度分の領域 -->
+                                <div class="square" style="right:0">
+                                <div class="square" style="right:100%;transform-origin: 100% 50%;transform:rotate(180deg);">
+                                    <div class="circle" style="left:0;"></div>
+                                </div>
+                                </div>
+                                <!-- 左側の180度分の領域 -->
+                                <div class="square" style="left:0;">
+                                <div class="square" style="left:100%;transform-origin: 0 50%;transform:rotate(30deg);">
+                                    <div class="circle" style="right:0;">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content_one_add">
+                        <button class="content_one_add_button" type="button">+</button>
+                    </div>
+            </div>
+            <div class="popup_one">
+                <div class="content_popup_one">
+                    <!-- ここの<p>に入力する事項を入れるテキストボックスを用意して、
+                    それを基に同じmainpage内のコンテンツのところに追加する -->
+                    <p>サンプルテキスト、サンプルテキスト、サンプルテキスト、サンプルテキスト</p>
+                    <button class="add_content_one">追加</button>
+                    <button class="close_popup_one">閉じる</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content_cover">
+            <div class="content">
+
+                <div class="ES component_content_second">
+                    <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                        <div style="position:relative;width:200px;height:200px;">
+                            <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                <span>asdf</span>
+                                <span>1</span>
+                            </div>
+                            <!-- 右側の180度分の領域 -->
+                            <div class="square" style="right:0">
+                                <div class="square change_1" style="right:100%;transform-origin: 100% 50%;transform:rotate(180deg);">
+                                    <div class="circle" style="left:0;"></div>
+                                </div>
+                            </div>
+                            <!-- 左側の180度分の領域 -->
+                            <div class="square" style="left:0;">
+                                <div class="square change_2" style="left:100%;transform-origin: 0 50%;transform:rotate(30deg);">
+                                    <div class="circle" style="right:0;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ES component_content_second">
+                    <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                        <div style="position:relative;width:200px;height:200px;">
+                            <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                <span>asdf</span>
+                                <span>1</span>
+                            </div>
+                            <!-- 右側の180度分の領域 -->
+                            <div class="square" style="right:0">
+                                <div class="square change_1" style="right:100%;transform-origin: 100% 50%;transform:rotate(180deg);">
+                                    <div class="circle" style="left:0;"></div>
+                                </div>
+                            </div>
+                            <!-- 左側の180度分の領域 -->
+                            <div class="square" style="left:0;">
+                                <div class="square change_2" style="left:100%;transform-origin: 0 50%;transform:rotate(30deg);">
+                                    <div class="circle" style="right:0;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ES component_content_second">
+                    <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                        <div style="position:relative;width:200px;height:200px;">
+                            <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                <span>asdf</span>
+                                <span>1</span>
+                            </div>
+                            <!-- 右側の180度分の領域 -->
+                            <div class="square" style="right:0">
+                                <div class="square change_1" style="right:100%;transform-origin: 100% 50%;transform:rotate(180deg);">
+                                    <div class="circle" style="left:0;"></div>
+                                </div>
+                            </div>
+                            <!-- 左側の180度分の領域 -->
+                            <div class="square" style="left:0;">
+                                <div class="square change_2" style="left:100%;transform-origin: 0 50%;transform:rotate(30deg);">
+                                    <div class="circle" style="right:0;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ES component_content_second">
+                    <div class="circle_wrap" style="transform: scale(0.5) translate(-50%, -50%);">
+                        <div style="position:relative;width:200px;height:200px;">
+                            <div style="position:absolute;width:200px;line-height: 200px;text-align: center;font-size:20px;font-weight: bold;">
+                                <span>asdf</span>
+                                <span>1</span>
+                            </div>
+                            <!-- 右側の180度分の領域 -->
+                            <div class="square" style="right:0">
+                                <div class="square change_1" style="right:100%;transform-origin: 100% 50%;transform:rotate(180deg);">
+                                    <div class="circle" style="left:0;"></div>
+                                </div>
+                            </div>
+                            <!-- 左側の180度分の領域 -->
+                            <div class="square" style="left:0;">
+                                <div class="square change_2" style="left:100%;transform-origin: 0 50%;transform:rotate(30deg);">
+                                    <div class="circle" style="right:0;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content_second_add">
+                    <button class="content_second_add_button" type="button">+</button>
+                </div>
+                <div class="popup_second">
+                    <div class="content_popup_second">
+                        <!-- ここの<p>に入力する事項を入れるテキストボックスを用意して、
+                        それを基に同じmainpage内のコンテンツのところに追加する -->
+                        <p>サンプルテキスト、サンプルテキスト、サンプルテキスト、サンプルテキスト</p>
+                        <button class="add_content_second">追加</button>
+                        <button class="close_popup_second">閉じる</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content"></div>
+
+    </div>
   <div class="schedule">
       <h2>1週間の予定</h2>
   </div>

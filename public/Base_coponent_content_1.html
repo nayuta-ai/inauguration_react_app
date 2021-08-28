@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../src/Base_component_content_one.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- ここから基盤を考える-->
+        <div>
+<!--ここでcontent1のyear,month,dayを入れる-->
+            <div class="js_date">時期</div>
+<!--ここでcontent1のsomething-->
+            <div class="js_name">ここにjsで読み込んだnameを入れる</div>
+        </div>
+
+        <div class="wrap">
+            <!-- 以下では、jsで読み込んだnameに対応するデータに基づいて以下を構成していく-->
+            <div class="lite">
+<!--ここでcontent_oneのdetailを入れる-->                
+                <div>やること</div>
+                <button class="text_add">メモ追加</button>
+
+                <div class="memo">
+                    <div class="preceed_circle">
+                        <input type="checkbox" class="circle_item" />
+                    </div>
+                    <div class="topic_component">
+<!--ここにcontent1のtextを入れる-->
+                        <div class="text">ここにメモしたテキストを入れる。サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</div>
+                        <div class="option_wrap">
+                            <div class="edit_memo_edit ">編集</div>
+                            <div class="edit_memo_remove ">削除</div>                            
+                        </div>
+<!--ここにcontent1のfileを入れる-->
+                        <div class="saving_file">ここは保存してあるファイルを提示</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="edit_popup_one">
+                <div class="edit_content_popup_one">
+                    <!-- ここの<p>に入力する事項を入れるテキストボックスを用意して、
+                    それを基に同じmainpage内のコンテンツのところに追加する -->
+                    <!--多分このinputの大きさはある程度大きくする必要がある-->
+                    <input type="text" class="edit_text" value="ここに編集するテキストを入れる" required>
+                    <input type="file" class="edit_saving_file" value="ここは保存してあるファイルを提示" multiple/>
+                    <button class="save_content_one">保存する</button>
+                    <button class="add_content_one">追加する</button>
+                    <button class="close_popup_one">変更せず閉じる</button>
+                </div>
+            </div>
+        </div>
+        <script src="../src/Base_component_content_one.js"></script>
+    </body>
+</html>
